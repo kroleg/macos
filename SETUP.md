@@ -8,12 +8,14 @@
   - Pref -> Keyboard -> Keyboard shortcuts -> Keyboard - Moved focus to next window
 - install brewfile
   `brew bundle install` (run in this folder)
-  - To install useful key bindings and fuzzy completion:
+  - After: To install useful key bindings and fuzzy completion:
     `$(brew --prefix)/opt/fzf/install`
 - config git
-  - `git config --global user.name "YOUR NAME"`
-  - `git config --global user.email "YOUR EMAIL"`
-- Screenshots should go to Pictures folder: https://www.macworld.co.uk/how-to/change-where-mac-screenshots-savedt-3682381/
+  ```bash
+  git config --global user.name "YOUR NAME"
+  git config --global user.email "YOUR EMAIL"
+  ```
+- [Screenshots should go to Pictures folder](https://www.macworld.co.uk/how-to/change-where-mac-screenshots-savedt-3682381/)
   > 1. Press Command + Shift + 5.
   > 2. Click on Options.
   > 3. Now either pick a folder that is listed, or choose Other Location.
