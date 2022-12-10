@@ -11,4 +11,5 @@
   - To install useful key bindings and fuzzy completion:
     `$(brew --prefix)/opt/fzf/install`
 - config git
-  `git config --global user.name YOUR NAME`
+  - `git config --global user.name "YOUR NAME"`
+  - `git config --global user.email "YOUR EMAIL"`
