@@ -13,3 +13,9 @@
 - config git
   - `git config --global user.name "YOUR NAME"`
   - `git config --global user.email "YOUR EMAIL"`
+- Screenshots should go to Pictures folder: https://www.macworld.co.uk/how-to/change-where-mac-screenshots-savedt-3682381/
+  > 1. Press Command + Shift + 5.
+  > 2. Click on Options.
+  > 3. Now either pick a folder that is listed, or choose Other Location.
+  > 4. If you choose Other Location you can navigate to the folder you wish the screenshot to go to, or create a folder if required.
+  > 5. Once you have changed the location that is where your screenshots will go until you change the location again.
