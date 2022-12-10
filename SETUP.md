@@ -2,6 +2,7 @@
 - Install Homebrew: https://docs.brew.sh/Installation#macos-requirements
 - Install oh-my-zsh: https://ohmyz.sh/
   - change ZSH_CUSTOM in ~/.zshrc to point to zsh/custom folder in this repo
+  - set `ZSH_THEME="kroleg"` in ~/.zshrc
 - Log in to google accounts in Apple Preferences > Internet Accounts
 - setup alt+Tab to switch windows
   - Pref -> Keyboard -> Keyboard shortcuts -> Keyboard - Moved focus to next window
