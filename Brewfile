@@ -7,3 +7,4 @@ brew "asdf"
 
 # aws and k8s
 brew "awscli"
+brew "k9s"
