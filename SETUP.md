@@ -4,6 +4,8 @@
   - Pref -> Keyboard -> Keyboard shortcuts -> Keyboard - Moved focus to next window
 - disable hot corners
 - map capslock to `Esc`
+- allow to use tab to switch between buttons in system popups
+  - go to Preferences -> Keyboard -> turn ON Keyboard navigation
 
 ## Soft
 - Install `Command Line Tools for Xcode`
