@@ -2,8 +2,8 @@
 function gfrb() {
   git fetch
   if git show-ref --quiet refs/heads/main; then
-    grbi main
+    grbi origin/main
   else
-    grbi master
+    grbi origin/master
   fi
 }
