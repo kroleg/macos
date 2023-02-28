@@ -1,5 +1,5 @@
 # git fetch and rebase on default branch
-function gfrb() {
+function gfrbim() {
   git fetch
   if git show-ref --quiet refs/heads/main; then
     grbi origin/main
