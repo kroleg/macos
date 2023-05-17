@@ -1,7 +1,9 @@
 function aws-creds() {
   PROFILE=$(aws configure list-profiles | fzf)
   aws sso login --profile=$PROFILE
-  # && eval $(aws-sso-creds --profile=$PROFILE export)
   export AWS_PROFILE=$PROFILE
+  
+  # skip the rest for data aws profiles
+  [[ $PROFILE == *"data"* ]] && return
   kubectl config use-context $PROFILE
 }
