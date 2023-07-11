@@ -1,5 +1,11 @@
 function aws-creds() {
-  PROFILE=$(aws configure list-profiles | fzf)
+  if [ $# -eq 0 ]
+  then
+    PROFILE=$(aws configure list-profiles | fzf)
+  else
+    PROFILE=$1
+  fi
+
   aws sso login --profile=$PROFILE
   export AWS_PROFILE=$PROFILE
   
