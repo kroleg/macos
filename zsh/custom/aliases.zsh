@@ -1,5 +1,6 @@
 alias tp="telepresence"
 alias k="kubectl"
+alias t="task"
 
 cdc() {
   cd "$HOME/Code/stashaway/$1"
