@@ -1,9 +1,8 @@
 # personal prefs
 brew "fzf"
 
-# asdf
-brew "gpg"
-brew "asdf"
+# tools management
+brew "mise"
 
 # aws and k8s
 brew "awscli"
