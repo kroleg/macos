@@ -11,3 +11,7 @@ _cdc () {
   _files -/ -W /$HOME/Code/stashaway -/ -/
 }
 compdef _cdc cdc
+
+sg-staging() {
+  kubectl config use-context sg-staging
+}
