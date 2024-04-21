@@ -6,6 +6,7 @@
 - map capslock to `Esc`
 - allow to use tab to switch between buttons in system popups
   - go to Preferences -> Keyboard -> turn ON Keyboard navigation
+- disable unwanted shortcuts in Preferences -> Keyboard -> Shortcuts (especially Services -> Text)
 
 ## Soft
 - Install `Command Line Tools for Xcode`
