@@ -2,7 +2,9 @@
 
 ## Init
 - install 1Password
-  - to get access to github ssh key
+  - doing it first to get access to github ssh key
+  - install ssh agent https://developer.1password.com/docs/ssh/agent/
+    - go to Settings -> Developer -> Enable SSH Agent
 - clone this repo
 
 ## Terminal
