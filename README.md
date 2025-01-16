@@ -9,7 +9,7 @@
 
 ## Terminal
 - install [iTerm2](https://iterm2.com/)
-- [install](https://ohmyz.sh/#install)
+- [install ohmyzsh](https://ohmyz.sh/#install)
 - change ZSH_CUSTOM in ~/.zshrc to point to zsh/custom folder in this repo
 - set `ZSH_THEME="kroleg"` in ~/.zshrc
 
