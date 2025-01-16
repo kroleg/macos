@@ -26,6 +26,3 @@ brew "glab"
 
 # https://taskfile.dev/
 brew "go-task"
-
-# rest client (not best, but something)
-cask "insomnia"
