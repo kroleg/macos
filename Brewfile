@@ -17,7 +17,6 @@ brew "yq"
 brew "fluxcd/tap/flux"
 
 # Fira Code https://github.com/tonsky/FiraCode
-tap "homebrew/cask-fonts"
 cask "font-fira-code"
 
 # github and gitlab clis
