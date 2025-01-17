@@ -10,17 +10,12 @@
 ## Terminal
 - install [iTerm2](https://iterm2.com/)
 - [install ohmyzsh](https://ohmyz.sh/#install)
-- change ZSH_CUSTOM in ~/.zshrc to point to zsh/custom folder in this repo
+- change `ZSH_CUSTOM` to point to zsh/custom folder in this repo and `ZSH_THEME` to `kroleg`
   ```shell
-  sed -i.bak "s|^\(ZSH_CUSTOM=\).*|\1\"$PWD/zsh/custom\"|" ~/.zshrc
-  ```
-- set `ZSH_THEME="kroleg"` in ~/.zshrc
-  ```shell
-  sed -i.bak "s|^\(ZSH_THEME=\).*|\1\"kroleg\"|" ~/.zshrc
-  ```
-- verify
-  ```shell
-  cat ~/.zshrc | grep -E "ZSH_CUSTOM|ZSH_THEME"
+  sed -i.bak \
+    -e "s|^#.*\(ZSH_CUSTOM=\).*|\1\"$PWD/zsh/custom\"|" \
+    -e "s|^\(ZSH_THEME=\).*|\1\"kroleg\"|" ~/.zshrc
+  cat ~/.zshrc | grep -E "^ZSH_CUSTOM|^ZSH_THEME"
   ```
 - restart terminal
 
