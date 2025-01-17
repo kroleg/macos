@@ -38,6 +38,11 @@ git config --global user.email "YOUR EMAIL"
 git config --global core.excludesfile "$(pwd)/git/global-gitignore"
 ```
 
+setup personal git email for this repo
+```shell
+git config user.email "***@gmail.com"
+```
+
 ## Macos quirks and stuff
 - Log in to google accounts in Apple Preferences > Internet Accounts
 - setup alt+Tab to switch windows
