@@ -37,12 +37,12 @@ You need to also:
 - export settings from prev laptop
 - import into new one
 
-## VSCode
+### VSCode
 Installed via brew
 You need to also:
 - turn on settings sync
 
-## git
+### git
 ```shell
 git config --global user.name "YOUR NAME"
 git config --global user.email "YOUR EMAIL"
