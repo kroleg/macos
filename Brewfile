@@ -3,6 +3,9 @@
 # personal prefs
 brew "fzf"
 
+cask "visual-studio-code"
+cask "raycast"
+
 # tools management
 brew "mise"
 

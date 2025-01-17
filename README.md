@@ -31,6 +31,17 @@
   - After: To install useful key bindings and fuzzy completion:
     `$(brew --prefix)/opt/fzf/install`
 
+### Raycast
+Should have been installed via brew above
+You need to also:
+- export settings from prev laptop
+- import into new one
+
+## VSCode
+Installed via brew
+You need to also:
+- turn on settings sync
+
 ## git
 ```shell
 git config --global user.name "YOUR NAME"
