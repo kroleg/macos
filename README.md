@@ -9,6 +9,8 @@
 
 ## Terminal
 - install [iTerm2](https://iterm2.com/)
+  - go to Profiles -> Default -> Keys -> Key mappings click on `Presets...` and choose `Natural Text Editing`
+  - to enable `Option + Arrow` to move by word and `Command + Arrow` to move to beginning/end of line
 - [install ohmyzsh](https://ohmyz.sh/#install)
 - change `ZSH_CUSTOM` to point to zsh/custom folder in this repo and `ZSH_THEME` to `kroleg`
   ```shell
@@ -48,10 +50,6 @@ setup personal git email for this repo
 ```shell
 git config user.email "***@gmail.com"
 ```
-
-### iTerm2
-- go to Profiles -> Default -> Keys -> Key mappings click on `Presets...` and choose `Natural Text Editing`
-  - to enable `Option + Arrow` to move by word and `Command + Arrow` to move to beginning/end of line
 
 ## Macos quirks and stuff
 - Log in to google accounts in Apple Preferences > Internet Accounts
