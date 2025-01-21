@@ -49,6 +49,10 @@ setup personal git email for this repo
 git config user.email "***@gmail.com"
 ```
 
+### iTerm2
+- go to Profiles -> Default -> Keys -> Key mappings click on `Presets...` and choose `Natural Text Editing`
+  - to enable `Option + Arrow` to move by word and `Command + Arrow` to move to beginning/end of line
+
 ## Macos quirks and stuff
 - Log in to google accounts in Apple Preferences > Internet Accounts
 - setup alt+Tab to switch windows
