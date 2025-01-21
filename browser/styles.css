@@ -1,0 +1,4 @@
+/* gitlab mr list for hight width */
+.issuable-info-container {
+    flex-direction: row-reverse !important;
+}
