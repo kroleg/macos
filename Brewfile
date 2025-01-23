@@ -11,6 +11,7 @@ brew "mise"
 
 # mostly devops stuff
 brew "awscli"
+brew "kubectl"
 brew "k9s"
 brew "helm"
 brew "jq"
