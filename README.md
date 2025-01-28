@@ -8,10 +8,12 @@
 - clone this repo
 
 ## Terminal
-- install [iTerm2](https://iterm2.com/)
-  - go to Profiles -> Default -> Keys -> Key mappings click on `Presets...` and choose `Natural Text Editing`
-  - to enable `Option + Arrow` to move by word and `Command + Arrow` to move to beginning/end of line
-  - set shortcuts for `Next Tab` to `Cmd + Shift + Right` and `Cmd + Shift + Left` for `Previous Tab`
+- install [Ghostty](https://ghostty.org/docs/install/binary#macos)
+  - set path to config (run in this folder)
+    ```shell
+    mkdir -p ~/.config/ghostty && echo "config-file = $(pwd)/ghostty/config" > ~/.config/ghostty/config
+    ```
+
 - [install ohmyzsh](https://ohmyz.sh/#install)
 - change `ZSH_CUSTOM` to point to zsh/custom folder in this repo and `ZSH_THEME` to `kroleg`
   ```shell
