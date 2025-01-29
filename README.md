@@ -13,6 +13,7 @@
     ```shell
     mkdir -p ~/.config/ghostty && echo "config-file = $(pwd)/ghostty/config" > ~/.config/ghostty/config
     ```
+  - ghostty will ask for premissions to be able to assign global hotkey
 
 - [install ohmyzsh](https://ohmyz.sh/#install)
 - change `ZSH_CUSTOM` to point to zsh/custom folder in this repo and `ZSH_THEME` to `kroleg`
