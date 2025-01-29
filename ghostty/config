@@ -13,5 +13,3 @@ window-padding-y = 10
 
 keybind = global:cmd+shift+alt+ctrl+t=toggle_quick_terminal
 quick-terminal-position = right
-
-working-directory = /Users/vitaliy/Code/stashaway
