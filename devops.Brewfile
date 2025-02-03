@@ -1,0 +1,11 @@
+brew "awscli"
+brew "kubectl"
+brew "k9s"
+brew "helm"
+brew "jq"
+brew "kustomize"
+brew "sops"
+brew "yq"
+brew "fluxcd/tap/flux"
+
+brew "glab"
