@@ -25,9 +25,10 @@
 - restart terminal
 
 ## Base
-- install [Homebrew](https://brew.sh/)
-- install stuff from brewfile
-  `brew bundle install` (run in this folder)
+- [install Homebrew from .pkg](https://github.com/Homebrew/brew/releases)
+- install stuff from brewfiles:
+  - `brew bundle install` for base stuff
+  - `brew bundle install --file devops.Brewfile` for work related stuff
   - After: To install useful key bindings and fuzzy completion:
     `$(brew --prefix)/opt/fzf/install`
 
