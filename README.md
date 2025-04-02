@@ -5,6 +5,9 @@
   - doing it first to get access to github ssh key
   - enable ssh agent: Settings -> Developer -> Enable SSH Agent
 - clone this repo
+  ```shell
+  cd ~/code && git clone git@github.com:kroleg/macos.git os
+  ```
 
 ## Terminal
 - install [Ghostty](https://ghostty.org/docs/install/binary#macos)
