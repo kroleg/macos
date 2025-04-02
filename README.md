@@ -28,15 +28,23 @@
 - install command-line tools
 - [install Homebrew from .pkg](https://github.com/Homebrew/brew/releases)
 - add homebrew to shell script
-  ```
+  ```shell
   echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
   eval "$(/opt/homebrew/bin/brew shellenv)"
   ```
 - install stuff from brewfiles:
-  - `brew bundle install` for base stuff
-  - `brew bundle install --file devops.Brewfile` for work related stuff
-  - After: To install useful key bindings and fuzzy completion:
-    `$(brew --prefix)/opt/fzf/install`
+  - base
+    ```shell
+    brew bundle install
+    ```
+  - work related
+    ```shell
+    brew bundle install --file devops.Brewfile`
+    ```
+- useful key bindings and fuzzy completion
+  ```shell
+  $(brew --prefix)/opt/fzf/install
+  ```
 
 ### Raycast
 Should have been installed via brew above
