@@ -1,7 +1,7 @@
 # Laptop setup
 
 ## Init
-- (install 1Password)[https://1password.com/downloads/mac]
+- [install 1Password](https://1password.com/downloads/mac)
   - doing it first to get access to github ssh key
   - enable ssh agent: Settings -> Developer -> Enable SSH Agent
 - clone this repo
