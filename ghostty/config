@@ -16,3 +16,6 @@ quick-terminal-position = right
 
 # avoid invisible text (like black on black)
 minimum-contrast = 1.1
+
+adjust-cursor-thickness=3
+adjust-cursor-height=20%
