@@ -3,7 +3,7 @@ font-family = Fira Code
 background-opacity = 0.8
 background-blur-radius = 20
 
-window-width = 120
+window-width = 150
 window-height = 75
 
 # nice round corners and no useless titlebar
