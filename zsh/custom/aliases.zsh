@@ -2,6 +2,7 @@ alias tp="telepresence"
 alias k="kubectl"
 alias t="task"
 alias tg="task --global"
+alias clone="stash repo clone"
 
 cdc() {
   cd "$HOME/Code/stashaway/$1"
