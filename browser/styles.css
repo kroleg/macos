@@ -2,3 +2,8 @@
 .issuable-info-container {
     flex-direction: row-reverse !important;
 }
+
+/* gitlab todo list: move button to the right because easier to reach */
+.todos-list > li > div {
+    flex-direction: row-reverse !important;
+}
