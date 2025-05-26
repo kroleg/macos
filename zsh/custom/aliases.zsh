@@ -1,21 +1,7 @@
-alias tp="telepresence"
 alias k="kubectl"
 alias t="task"
 alias tg="task --global"
 alias clone="stash repo clone"
-
-cdc() {
-  cd "$HOME/Code/stashaway/$1"
-}
-_cdc () {
-  ((CURRENT == 2)) &&
-  _files -/ -W /$HOME/Code/stashaway -/ -/
-}
-compdef _cdc cdc
-
-sg-staging() {
-  kubectl config use-context sg-staging
-}
 
 # Git Skim function with commit info and diff output
 gsk() {
