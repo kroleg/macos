@@ -2,6 +2,8 @@ alias k="kubectl"
 alias t="task"
 alias tg="task --global"
 alias clone="stash repo clone"
+alias ssa="stash staging auth"
+alias spi="stash project info"
 
 # Git Skim function with commit info and diff output
 gsk() {
