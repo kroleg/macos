@@ -1,4 +1,4 @@
-theme = dark:carbonfox,light:BlulocoLight
+theme = dark:GitHub Dark Colorblind,light:Bluloco Light
 font-family = Fira Code
 #background-opacity = 0.8
 background-blur-radius = 20
