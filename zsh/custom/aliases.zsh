@@ -4,6 +4,7 @@ alias tg="task --global"
 alias clone="stash repo clone"
 alias ssa="stash staging auth"
 alias spi="stash project info"
+alias uat="stash uat"
 
 # Git Skim function with commit info and diff output
 gsk() {
