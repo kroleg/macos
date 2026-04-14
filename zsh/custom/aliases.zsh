@@ -5,6 +5,13 @@ alias clone="stash repo clone"
 alias ssa="stash staging auth"
 alias spi="stash project info"
 alias uat="stash uat"
+alias cc="claude"
+alias oc="opencode"
+alias ccr="claude --resume"
+alias aicmd="stash aicmd -ce --chaiku"
+alias mrs="stash dashboard mr"
+alias grbmi="grbm -i"
+alias gsmwgl="gswm && gl"
 
 # Git Skim function with commit info and diff output
 gsk() {
