@@ -100,10 +100,10 @@ function bar(remaining: number, width = 8): string {
   return '█'.repeat(filled) + '░'.repeat(width - filled)
 }
 
-function color(remaining: number): string {
+function color(remaining: number): string | null {
   if (remaining <= 10) return '#FF3B30'
   if (remaining <= 30) return '#FF9500'
-  return '#34C759'
+  return null
 }
 
 // ── Fetch data ─────────────────────────────────────────────────────────────────
@@ -129,31 +129,38 @@ if (!usage) {
 }
 
 const { fiveHourRemaining, weeklyRemaining, fiveHourResetsAt, weeklyResetsAt } = usage
-const fiveHourUsed = Math.round(100 - fiveHourRemaining)
-const weeklyUsed = Math.round(100 - weeklyRemaining)
+const fiveHourLeft = Math.round(fiveHourRemaining)
+const weeklyLeft = Math.round(weeklyRemaining)
 
 // Pick the worse (lower remaining) for the menu bar color
 const menuColor = color(Math.min(fiveHourRemaining, weeklyRemaining))
 
+const fiveReset = timeUntil(fiveHourResetsAt)
+const weekReset = timeUntil(weeklyResetsAt)
+
 // ── Menu bar line ──────────────────────────────────────────────────────────────
-console.log(`☁ 5h:${fiveHourUsed}% wk:${weeklyUsed}% | color=${menuColor}`)
+// Show weekly only when < 50% left to reduce clutter
+const weeklyPart = weeklyLeft < 50 ? ` w:${weeklyLeft}%` : ''
+const fiveResetPart = fiveReset ? ` · ${fiveReset}` : ''
+const colorPart = menuColor ? ` | color=${menuColor}` : ''
+console.log(`5h:${fiveHourLeft}%${weeklyPart}${fiveResetPart}${colorPart}`)
 
 // ── Dropdown ───────────────────────────────────────────────────────────────────
 console.log('---')
 
-const fiveReset = timeUntil(fiveHourResetsAt)
-const weekReset = timeUntil(weeklyResetsAt)
+const fiveColor = color(fiveHourRemaining)
+const weeklyColor = color(weeklyRemaining)
 
 console.log(`5-hour window | size=11 color=#888888`)
 console.log(
-  `${bar(fiveHourRemaining)}  ${fiveHourUsed}% used  ${Math.round(fiveHourRemaining)}% left${fiveReset ? `  · resets in ${fiveReset}` : ''} | font=Menlo size=12 color=${color(fiveHourRemaining)}`,
+  `${bar(fiveHourRemaining)}  ${fiveHourLeft}% left${fiveReset ? `  · resets in ${fiveReset}` : ''} | font=Menlo size=12${fiveColor ? ` color=${fiveColor}` : ''}`,
 )
 
 console.log('---')
 
 console.log(`7-day window | size=11 color=#888888`)
 console.log(
-  `${bar(weeklyRemaining)}  ${weeklyUsed}% used  ${Math.round(weeklyRemaining)}% left${weekReset ? `  · resets in ${weekReset}` : ''} | font=Menlo size=12 color=${color(weeklyRemaining)}`,
+  `${bar(weeklyRemaining)}  ${weeklyLeft}% left${weekReset ? `  · resets in ${weekReset}` : ''} | font=Menlo size=12${weeklyColor ? ` color=${weeklyColor}` : ''}`,
 )
 
 console.log('---')
