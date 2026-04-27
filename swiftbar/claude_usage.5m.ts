@@ -143,7 +143,9 @@ const weekReset = timeUntil(weeklyResetsAt)
 const segments = Math.round(fiveHourRemaining / 20)
 const battery = '▰'.repeat(segments) + '▱'.repeat(5 - segments)
 const resetHours = fiveHourResetsAt ? Math.max(0, fiveHourResetsAt.getTime() - Date.now()) / 3_600_000 : 0
-const resetPart = fiveHourResetsAt ? ` ${resetHours < 1 ? '<1h' : `${Math.round(resetHours)}h`}` : ''
+// Show hours only when spending faster than natural rate (remaining < hours * 20%)
+const overBudget = fiveHourRemaining < resetHours * 20
+const resetPart = overBudget ? ` ${resetHours < 1 ? '<1h' : `${Math.round(resetHours)}h`}` : ''
 const weeklyPart = weeklyLeft < 50 ? ` w:${weeklyLeft}%` : ''
 const colorPart = menuColor ? ` | color=${menuColor}` : ''
 console.log(`${battery}${resetPart}${weeklyPart}${colorPart}`)
