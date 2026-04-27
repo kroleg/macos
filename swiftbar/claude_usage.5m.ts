@@ -100,10 +100,10 @@ function bar(remaining: number, width = 8): string {
   return '█'.repeat(filled) + '░'.repeat(width - filled)
 }
 
-function color(remaining: number): string | null {
-  if (remaining <= 10) return '#FF3B30'
-  if (remaining <= 30) return '#FF9500'
-  return null
+function colorAttr(remaining: number): string {
+  if (remaining <= 10) return ' color=#FF3B30'
+  if (remaining <= 30) return ' color=#FF9500'
+  return ''
 }
 
 // ── Fetch data ─────────────────────────────────────────────────────────────────
@@ -133,7 +133,7 @@ const fiveHourLeft = Math.round(fiveHourRemaining)
 const weeklyLeft = Math.round(weeklyRemaining)
 
 // Pick the worse (lower remaining) for the menu bar color
-const menuColor = color(Math.min(fiveHourRemaining, weeklyRemaining))
+const menuColorAttr = colorAttr(Math.min(fiveHourRemaining, weeklyRemaining))
 
 const fiveReset = timeUntil(fiveHourResetsAt)
 const weekReset = timeUntil(weeklyResetsAt)
@@ -147,26 +147,21 @@ const resetHours = fiveHourResetsAt ? Math.max(0, fiveHourResetsAt.getTime() - D
 const overBudget = fiveHourRemaining < resetHours * 20
 const resetPart = overBudget ? ` ${resetHours < 1 ? '<1h' : `${Math.round(resetHours)}h`}` : ''
 const weeklyPart = weeklyLeft < 50 ? ` w:${weeklyLeft}%` : ''
-const colorPart = menuColor ? ` | color=${menuColor}` : ''
-console.log(`${battery}${resetPart}${weeklyPart}${colorPart}`)
+console.log(`${battery}${resetPart}${weeklyPart}${menuColorAttr ? ` |${menuColorAttr}` : ''}`)
 
 // ── Dropdown ───────────────────────────────────────────────────────────────────
 console.log('---')
 
-const fiveColor = color(fiveHourRemaining)
-const weeklyColor = color(weeklyRemaining)
+function printWindow(label: string, remaining: number, left: number, reset: string) {
+  console.log(`${label} | size=11 color=#888888`)
+  console.log(
+    `${bar(remaining)}  ${left}% left${reset ? `  · resets in ${reset}` : ''} | font=Menlo size=12${colorAttr(remaining)}`,
+  )
+}
 
-console.log(`5-hour window | size=11 color=#888888`)
-console.log(
-  `${bar(fiveHourRemaining)}  ${fiveHourLeft}% left${fiveReset ? `  · resets in ${fiveReset}` : ''} | font=Menlo size=12${fiveColor ? ` color=${fiveColor}` : ''}`,
-)
-
+printWindow('5-hour window', fiveHourRemaining, fiveHourLeft, fiveReset)
 console.log('---')
-
-console.log(`7-day window | size=11 color=#888888`)
-console.log(
-  `${bar(weeklyRemaining)}  ${weeklyLeft}% left${weekReset ? `  · resets in ${weekReset}` : ''} | font=Menlo size=12${weeklyColor ? ` color=${weeklyColor}` : ''}`,
-)
+printWindow('7-day window', weeklyRemaining, weeklyLeft, weekReset)
 
 console.log('---')
 console.log(`Updated ${new Date().toLocaleTimeString()} | size=11 color=#888888`)
