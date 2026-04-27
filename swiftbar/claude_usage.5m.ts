@@ -111,7 +111,7 @@ function colorAttr(remaining: number): string {
 const creds = await getCredentials()
 
 if (!creds) {
-  console.log('auth? | color=#999999 sfimage=cloud.fill')
+  console.log('auth? | color=#999999 sfimage=key.fill sfcolor=#999999')
   console.log('---')
   console.log('No Claude credentials found')
   console.log('Sign in via Claude Code to enable usage tracking')
@@ -121,7 +121,7 @@ if (!creds) {
 const usage = await fetchUsage(creds.accessToken)
 
 if (typeof usage === 'string') {
-  console.log(`${usage} | color=#FF3B30 sfimage=cloud.fill`)
+  console.log(`${usage} | color=#FF3B30 sfimage=exclamationmark.triangle.fill sfcolor=#FF3B30`)
   console.log('---')
   console.log(`Failed to fetch usage data (${usage}) | color=#FF3B30`)
   console.log('Refresh | refresh=true')
