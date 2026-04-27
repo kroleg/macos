@@ -17,3 +17,6 @@ minimum-contrast = 1.1
 
 adjust-cursor-thickness=3
 adjust-cursor-height=20%
+
+# block cmd+backspace line-kill globally (was wiping Claude Code input)
+keybind = cmd+backspace=ignore
