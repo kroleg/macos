@@ -54,7 +54,7 @@ async function getCredentials(): Promise<OAuthCredentials | null> {
   return (await readKeychainCredentials()) ?? (await readFileCredentials())
 }
 
-async function fetchUsage(token: string): Promise<UsageData | null> {
+async function fetchUsage(token: string): Promise<UsageData | string> {
   try {
     const resp = await fetch('https://api.anthropic.com/api/oauth/usage', {
       headers: {
@@ -63,7 +63,7 @@ async function fetchUsage(token: string): Promise<UsageData | null> {
       },
       signal: AbortSignal.timeout(10_000),
     })
-    if (!resp.ok) return null
+    if (!resp.ok) return `${resp.status}`
     const data = await resp.json()
 
     const clamp = (v: number) => Math.max(0, Math.min(100, v))
@@ -74,7 +74,7 @@ async function fetchUsage(token: string): Promise<UsageData | null> {
       weeklyResetsAt: data.seven_day?.resets_at ? new Date(data.seven_day.resets_at) : undefined,
     }
   } catch {
-    return null
+    return 'err'
   }
 }
 
@@ -111,7 +111,7 @@ function colorAttr(remaining: number): string {
 const creds = await getCredentials()
 
 if (!creds) {
-  console.log('☁ auth? | color=#999999 sfimage=cloud.fill')
+  console.log('auth? | color=#999999 sfimage=cloud.fill')
   console.log('---')
   console.log('No Claude credentials found')
   console.log('Sign in via Claude Code to enable usage tracking')
@@ -120,10 +120,10 @@ if (!creds) {
 
 const usage = await fetchUsage(creds.accessToken)
 
-if (!usage) {
-  console.log('☁ err | color=#FF3B30 sfimage=cloud.fill')
+if (typeof usage === 'string') {
+  console.log(`${usage} | color=#FF3B30 sfimage=cloud.fill`)
   console.log('---')
-  console.log('Failed to fetch usage data | color=#FF3B30')
+  console.log(`Failed to fetch usage data (${usage}) | color=#FF3B30`)
   console.log('Refresh | refresh=true')
   Deno.exit(0)
 }
