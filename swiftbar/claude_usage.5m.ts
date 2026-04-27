@@ -141,7 +141,7 @@ const weekReset = timeUntil(weeklyResetsAt)
 // ── Menu bar line ──────────────────────────────────────────────────────────────
 // 5-segment battery + hours until 5h reset
 const segments = Math.round(fiveHourRemaining / 20)
-const battery = '▰'.repeat(segments) + '▱'.repeat(5 - segments)
+const battery = '▰'.repeat(segments) + '-'.repeat(5 - segments)
 const resetHours = fiveHourResetsAt ? Math.max(0, fiveHourResetsAt.getTime() - Date.now()) / 3_600_000 : 0
 // Show hours only when spending faster than natural rate (remaining < hours * 20%)
 const overBudget = fiveHourRemaining < resetHours * 20
