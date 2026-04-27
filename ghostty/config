@@ -1,4 +1,5 @@
-theme = dark:GitHub Dark Colorblind,light:Bluloco Light
+# prev used light theme: Bluloco Light
+theme = dark:GitHub Dark Colorblind,light:GitHub Light Colorblind
 font-family = Fira Code
 #background-opacity = 0.8
 background-blur-radius = 20
@@ -7,7 +8,7 @@ window-width = 150
 window-height = 75
 
 # nice round corners and no useless titlebar
-macos-titlebar-style = hidden
+macos-titlebar-style = native
 window-padding-x = 10
 window-padding-y = 10
 
