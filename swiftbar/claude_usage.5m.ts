@@ -139,11 +139,14 @@ const fiveReset = timeUntil(fiveHourResetsAt)
 const weekReset = timeUntil(weeklyResetsAt)
 
 // ── Menu bar line ──────────────────────────────────────────────────────────────
-// Show weekly only when < 50% left to reduce clutter
+// 5-segment battery + hours until 5h reset
+const segments = Math.round(fiveHourRemaining / 20)
+const battery = '▰'.repeat(segments) + '▱'.repeat(5 - segments)
+const resetHours = fiveHourResetsAt ? Math.max(0, fiveHourResetsAt.getTime() - Date.now()) / 3_600_000 : 0
+const resetPart = fiveHourResetsAt ? ` ${resetHours < 1 ? '<1h' : `${Math.round(resetHours)}h`}` : ''
 const weeklyPart = weeklyLeft < 50 ? ` w:${weeklyLeft}%` : ''
-const fiveResetPart = fiveReset ? ` · ${fiveReset}` : ''
 const colorPart = menuColor ? ` | color=${menuColor}` : ''
-console.log(`5h:${fiveHourLeft}%${weeklyPart}${fiveResetPart}${colorPart}`)
+console.log(`${battery}${resetPart}${weeklyPart}${colorPart}`)
 
 // ── Dropdown ───────────────────────────────────────────────────────────────────
 console.log('---')
