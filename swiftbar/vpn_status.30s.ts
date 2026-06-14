@@ -117,7 +117,7 @@ const displayName = whoami?.device?.customName ?? device.name
 if (active) {
   console.log(`${flagFor(active.displayName)} VPN`)
 } else {
-  console.log(`⚫ VPN`)
+  console.log(`VPN`)
 }
 
 // ── Dropdown ──────────────────────────────────────────────────────────────────
