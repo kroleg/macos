@@ -1,9 +1,9 @@
 #!/usr/bin/env -S /Users/vitaliy/.local/bin/deno run --allow-net --allow-read --allow-env --allow-run
 
-// <swiftbar.title>Claude Usage</swiftbar.title>
-// <swiftbar.version>1.0.0</swiftbar.version>
-// <swiftbar.desc>Shows Claude Code rate limit usage (5h and weekly windows)</swiftbar.desc>
-// <swiftbar.hideAboutMenuItem>true</swiftbar.hideAboutMenuItem>
+// <bitbar.title>Claude Usage</bitbar.title>
+// <bitbar.version>1.0.0</bitbar.version>
+// <bitbar.desc>Shows Claude Code rate limit usage (5h and weekly windows)</bitbar.desc>
+// <swiftbar.hideAbout>true</swiftbar.hideAbout>
 // <swiftbar.refreshOnOpen>true</swiftbar.refreshOnOpen>
 
 interface OAuthCredentials {

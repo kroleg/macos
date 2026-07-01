@@ -1,9 +1,9 @@
 #!/usr/bin/env -S /Users/vitaliy/.local/bin/deno run --allow-net --allow-env
 
-// <swiftbar.title>VPN Status</swiftbar.title>
-// <swiftbar.version>2.0.0</swiftbar.version>
-// <swiftbar.desc>Shows current device VPN policy and allows switching</swiftbar.desc>
-// <swiftbar.hideAboutMenuItem>true</swiftbar.hideAboutMenuItem>
+// <bitbar.title>VPN Status</bitbar.title>
+// <bitbar.version>2.0.0</bitbar.version>
+// <bitbar.desc>Shows current device VPN policy and allows switching</bitbar.desc>
+// <swiftbar.hideAbout>true</swiftbar.hideAbout>
 // <swiftbar.refreshOnOpen>true</swiftbar.refreshOnOpen>
 
 // vpn.internal auto-identifies the caller by source IP, so the plugin doesn't

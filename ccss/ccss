@@ -1,0 +1,77 @@
+#!/usr/bin/env bash
+# ccss — Claude Code Session Search
+# Starts a local web UI for searching through Claude Code sessions.
+
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "$(readlink -f "$0")")" && pwd)"
+PORT="${CCSS_PORT:-7890}"
+
+usage() {
+  cat <<EOF
+Usage: ccss [command]
+
+Commands:
+  start   Start the server and open browser (default)
+  stop    Stop the running server
+  status  Check if the server is running
+
+Environment:
+  CCSS_PORT  Port to listen on (default: 7890)
+EOF
+}
+
+pid_on_port() {
+  lsof -ti :"$PORT" 2>/dev/null || true
+}
+
+cmd_start() {
+  local existing
+  existing="$(pid_on_port)"
+  if [[ -n "$existing" ]]; then
+    echo "Stopping existing instance (PID $existing)..."
+    echo "$existing" | xargs kill 2>/dev/null || true
+    sleep 0.3
+  fi
+
+  PORT="$PORT" node "$SCRIPT_DIR/server.js" &
+  local pid=$!
+  sleep 0.5
+
+  if kill -0 "$pid" 2>/dev/null; then
+    echo "Server running at http://localhost:$PORT (PID $pid)"
+    open "http://localhost:$PORT"
+  else
+    echo "Failed to start server" >&2
+    exit 1
+  fi
+}
+
+cmd_stop() {
+  local existing
+  existing="$(pid_on_port)"
+  if [[ -n "$existing" ]]; then
+    echo "$existing" | xargs kill 2>/dev/null
+    echo "Stopped (PID $existing)"
+  else
+    echo "Not running"
+  fi
+}
+
+cmd_status() {
+  local existing
+  existing="$(pid_on_port)"
+  if [[ -n "$existing" ]]; then
+    echo "Running on port $PORT (PID $existing)"
+  else
+    echo "Not running"
+  fi
+}
+
+case "${1:-start}" in
+  start)  cmd_start ;;
+  stop)   cmd_stop ;;
+  status) cmd_status ;;
+  -h|--help) usage ;;
+  *) echo "Unknown command: $1" >&2; usage; exit 1 ;;
+esac
