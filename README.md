@@ -8,15 +8,6 @@
   ```shell
   cd ~/code && git clone git@github.com:kroleg/macos.git os
   ```
-
-## Terminal
-- install [Ghostty](https://ghostty.org/docs/install/binary#macos)
-  - set path to config (run in this folder)
-    ```shell
-    mkdir -p ~/.config/ghostty && echo "config-file = $(pwd)/ghostty/config" > ~/.config/ghostty/config
-    ```
-  - ghostty will ask for premissions to be able to assign global hotkey
-
 - [install ohmyzsh](https://ohmyz.sh/#install)
 - change `ZSH_CUSTOM` to point to zsh/custom folder in this repo and `ZSH_THEME` to `kroleg`
   ```shell
@@ -28,7 +19,7 @@
 - restart terminal
 
 ## Base
-- install command-line tools
+- install command-line tools (probably installed already cause git requires them)
 - [install Homebrew from .pkg](https://github.com/Homebrew/brew/releases)
 - add homebrew to shell script
   ```shell
@@ -48,6 +39,11 @@
   ```shell
   $(brew --prefix)/opt/fzf/install
   ```
+- Ghostty setup
+  - set path to config (run in this folder)
+    ```shell
+    mkdir -p ~/.config/ghostty && echo "config-file = $(pwd)/ghostty/config" > ~/.config/ghostty/config
+    ```
 
 ### Raycast
 Should have been installed via brew above
