@@ -21,7 +21,7 @@
 ## Base
 - install command-line tools (probably installed already cause git requires them)
 - [install Homebrew from .pkg](https://github.com/Homebrew/brew/releases)
-- add homebrew to shell script
+- IF `brew` not accessible from terminal (`which brew` fails) add homebrew to shell script
   ```shell
   echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
   eval "$(/opt/homebrew/bin/brew shellenv)"
