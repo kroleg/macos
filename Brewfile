@@ -5,6 +5,8 @@ brew "fzf"
 
 cask "ghostty"
 
+cask "obsidian"
+
 cask "visual-studio-code"
 cask "raycast"
 
