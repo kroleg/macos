@@ -1,4 +1,4 @@
-#!/usr/bin/env -S /Users/vitaliy/.local/bin/deno run --allow-net --allow-read --allow-env --allow-run
+#!/usr/bin/env -S /Users/vitaliy/.local/share/mise/installs/deno/latest/bin/deno run --allow-net --allow-read --allow-env --allow-run --allow-write
 
 // <bitbar.title>Claude Usage</bitbar.title>
 // <bitbar.version>1.0.0</bitbar.version>
@@ -16,6 +16,63 @@ interface UsageData {
   weeklyRemaining: number
   fiveHourResetsAt?: Date
   weeklyResetsAt?: Date
+}
+
+interface CachedUsage {
+  fiveHourRemaining: number
+  weeklyRemaining: number
+  fiveHourResetsAt?: string
+  weeklyResetsAt?: string
+}
+
+interface Cache {
+  usage?: CachedUsage
+  fetchedAt?: string
+  nextAllowedAt?: string
+}
+
+const RATE_LIMIT_BACKOFF_MS = 30 * 60_000 // used when a 429 has no Retry-After header
+const ERROR_BACKOFF_MS = 5 * 60_000
+
+function cachePath(): string {
+  const home = Deno.env.get('HOME') ?? ''
+  return `${home}/.cache/swiftbar-claude-usage.json`
+}
+
+async function loadCache(): Promise<Cache> {
+  try {
+    return JSON.parse(await Deno.readTextFile(cachePath()))
+  } catch {
+    return {}
+  }
+}
+
+async function saveCache(cache: Cache): Promise<void> {
+  try {
+    const path = cachePath()
+    await Deno.mkdir(path.slice(0, path.lastIndexOf('/')), { recursive: true })
+    await Deno.writeTextFile(path, JSON.stringify(cache))
+  } catch {
+    // best-effort; a failed write just means we retry on the next tick
+  }
+}
+
+function toCached(usage: UsageData): CachedUsage {
+  return {
+    fiveHourRemaining: usage.fiveHourRemaining,
+    weeklyRemaining: usage.weeklyRemaining,
+    fiveHourResetsAt: usage.fiveHourResetsAt?.toISOString(),
+    weeklyResetsAt: usage.weeklyResetsAt?.toISOString(),
+  }
+}
+
+function fromCached(cached: CachedUsage): UsageData {
+  return {
+    fiveHourRemaining: cached.fiveHourRemaining,
+    weeklyRemaining: cached.weeklyRemaining,
+    fiveHourResetsAt: cached.fiveHourResetsAt ? new Date(cached.fiveHourResetsAt) : undefined,
+    weeklyResetsAt: cached.weeklyResetsAt ? new Date(cached.weeklyResetsAt) : undefined,
+  }
 }
 
 async function readKeychainCredentials(): Promise<OAuthCredentials | null> {
@@ -54,7 +111,21 @@ async function getCredentials(): Promise<OAuthCredentials | null> {
   return (await readKeychainCredentials()) ?? (await readFileCredentials())
 }
 
-async function fetchUsage(token: string): Promise<UsageData | string> {
+type FetchResult =
+  | { kind: 'ok'; usage: UsageData }
+  | { kind: 'rate-limited'; retryAfterMs?: number }
+  | { kind: 'error'; status: string }
+
+function parseRetryAfter(header: string | null): number | undefined {
+  if (!header) return undefined
+  const seconds = Number(header)
+  if (Number.isFinite(seconds)) return seconds * 1000
+  const date = new Date(header)
+  if (!Number.isNaN(date.getTime())) return Math.max(0, date.getTime() - Date.now())
+  return undefined
+}
+
+async function fetchUsage(token: string): Promise<FetchResult> {
   try {
     const resp = await fetch('https://api.anthropic.com/api/oauth/usage', {
       headers: {
@@ -63,18 +134,24 @@ async function fetchUsage(token: string): Promise<UsageData | string> {
       },
       signal: AbortSignal.timeout(10_000),
     })
-    if (!resp.ok) return `${resp.status}`
+    if (resp.status === 429) {
+      return { kind: 'rate-limited', retryAfterMs: parseRetryAfter(resp.headers.get('retry-after')) }
+    }
+    if (!resp.ok) return { kind: 'error', status: `${resp.status}` }
     const data = await resp.json()
 
     const clamp = (v: number) => Math.max(0, Math.min(100, v))
     return {
-      fiveHourRemaining: clamp(100 - (data.five_hour?.utilization ?? 0)),
-      weeklyRemaining: clamp(100 - (data.seven_day?.utilization ?? 0)),
-      fiveHourResetsAt: data.five_hour?.resets_at ? new Date(data.five_hour.resets_at) : undefined,
-      weeklyResetsAt: data.seven_day?.resets_at ? new Date(data.seven_day.resets_at) : undefined,
+      kind: 'ok',
+      usage: {
+        fiveHourRemaining: clamp(100 - (data.five_hour?.utilization ?? 0)),
+        weeklyRemaining: clamp(100 - (data.seven_day?.utilization ?? 0)),
+        fiveHourResetsAt: data.five_hour?.resets_at ? new Date(data.five_hour.resets_at) : undefined,
+        weeklyResetsAt: data.seven_day?.resets_at ? new Date(data.seven_day.resets_at) : undefined,
+      },
     }
   } catch {
-    return 'err'
+    return { kind: 'error', status: 'err' }
   }
 }
 
@@ -118,12 +195,40 @@ if (!creds) {
   Deno.exit(0)
 }
 
-const usage = await fetchUsage(creds.accessToken)
+const cache = await loadCache()
+const now = Date.now()
+const nextAllowedAt = cache.nextAllowedAt ? new Date(cache.nextAllowedAt).getTime() : 0
 
-if (typeof usage === 'string') {
-  console.log(`${usage} | color=#FF3B30 sfimage=exclamationmark.triangle.fill sfcolor=#FF3B30`)
+let usage: UsageData | undefined = cache.usage ? fromCached(cache.usage) : undefined
+let stale = false
+let statusNote: string | undefined
+
+if (nextAllowedAt > now) {
+  // Still in backoff from a previous rate-limit/error — don't hit the network again.
+  stale = usage !== undefined
+  statusNote = `rate limited — retrying in ${timeUntil(new Date(nextAllowedAt))}`
+} else {
+  const result = await fetchUsage(creds.accessToken)
+
+  if (result.kind === 'ok') {
+    usage = result.usage
+    await saveCache({ usage: toCached(usage), fetchedAt: new Date(now).toISOString() })
+  } else if (result.kind === 'rate-limited') {
+    const backoffMs = result.retryAfterMs ?? RATE_LIMIT_BACKOFF_MS
+    await saveCache({ ...cache, nextAllowedAt: new Date(now + backoffMs).toISOString() })
+    stale = usage !== undefined
+    statusNote = `rate limited — retrying in ${timeUntil(new Date(now + backoffMs))}`
+  } else {
+    await saveCache({ ...cache, nextAllowedAt: new Date(now + ERROR_BACKOFF_MS).toISOString() })
+    stale = usage !== undefined
+    statusNote = `error (${result.status}) — retrying in ${timeUntil(new Date(now + ERROR_BACKOFF_MS))}`
+  }
+}
+
+if (!usage) {
+  console.log('⚠︎ | color=#FF9500 sfimage=exclamationmark.triangle.fill sfcolor=#FF9500')
   console.log('---')
-  console.log(`Failed to fetch usage data (${usage}) | color=#FF3B30`)
+  console.log(`Failed to fetch usage data — ${statusNote} | color=#FF9500`)
   console.log('Refresh | refresh=true')
   Deno.exit(0)
 }
@@ -164,5 +269,9 @@ console.log('---')
 printWindow('7-day window', weeklyRemaining, weeklyLeft, weekReset)
 
 console.log('---')
-console.log(`Updated ${new Date().toLocaleTimeString()} | size=11 color=#888888`)
+if (stale && statusNote) {
+  console.log(`Cached data (${statusNote}) | size=11 color=#FF9500`)
+} else {
+  console.log(`Updated ${new Date().toLocaleTimeString()} | size=11 color=#888888`)
+}
 console.log('Refresh | refresh=true')
