@@ -15,3 +15,6 @@ brew "mise"
 
 # Fira Code https://github.com/tonsky/FiraCode
 cask "font-fira-code"
+
+# control external monitor's brightness, volume and contrast
+cask "monitorcontrol"
