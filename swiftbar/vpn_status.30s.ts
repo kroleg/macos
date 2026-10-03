@@ -1,4 +1,4 @@
-#!/usr/bin/env -S /Users/vitaliy/.local/bin/deno run --allow-net --allow-env
+#!/usr/bin/env -S /Users/vitaliy/.local/share/mise/installs/deno/latest/bin/deno run --allow-net --allow-env
 
 // <bitbar.title>VPN Status</bitbar.title>
 // <bitbar.version>2.0.0</bitbar.version>
