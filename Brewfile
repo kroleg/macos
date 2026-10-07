@@ -18,3 +18,6 @@ cask "font-fira-code"
 
 # control external monitor's brightness, volume and contrast
 cask "monitorcontrol"
+
+# bluetooth CLI, used by raycast/scripts/disconnect-gamepad.sh
+brew "blueutil"
