@@ -51,6 +51,14 @@ You need to also:
 - export settings from prev laptop
 - import into new one
 
+### Keymap viewer
+Floating window with the keyboard layers (`keymap/`), stays on top without taking focus.
+Data comes from `zmk-corne-dongle/keymap-drawer/draw.sh`, which also rebuilds the app.
+```shell
+keymap/build.sh
+```
+Show/hide with the Raycast "Keymap Viewer" script command (assign a hotkey).
+
 ### VSCode
 Installed via brew
 You need to also:
