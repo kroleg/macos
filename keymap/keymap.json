@@ -562,7 +562,7 @@
    },
    {
     "t": "е",
-    "s": "⌥ э"
+    "s": "ё"
    },
    "$$mdi:arrow-up-bold$$",
    {
@@ -573,10 +573,11 @@
    },
    {
     "t": "ш",
-    "s": "⌥ щ"
+    "s": "щ"
    },
    {
-    "t": "х"
+    "t": "х",
+    "s": "э"
    },
    "з",
    {
@@ -653,7 +654,7 @@
    },
    {
     "t": "ь",
-    "s": "⌥ ъ"
+    "s": "ъ"
    },
    {
     "t": "б"
@@ -661,15 +662,13 @@
    {
     "t": "ю"
    },
-   {
-    "t": "/"
-   },
+   "!",
    {
     "t": "$$mdi:minus-circle-outline$$",
     "type": "none"
    },
    "$$mdi:keyboard-tab$$",
-   "SYM",
+   "RU SYM",
    {
     "t": "$$mdi:keyboard-return$$",
     "type": "enter"
@@ -950,6 +949,127 @@
    },
    {
     "type": "held"
+   },
+   {
+    "t": "$$mdi:transfer$$",
+    "type": "trans"
+   }
+  ],
+  "RU SYM": [
+   {
+    "t": "$$mdi:minus-circle-outline$$",
+    "type": "none"
+   },
+   {
+    "t": "$$mdi:minus-circle-outline$$",
+    "type": "none"
+   },
+   "%",
+   {
+    "t": "$$mdi:minus-circle-outline$$",
+    "type": "none"
+   },
+   {
+    "t": "$$mdi:minus-circle-outline$$",
+    "type": "none"
+   },
+   "ё",
+   {
+    "t": "$$mdi:menu-up$$",
+    "s": "$$mdi:mouse$$"
+   },
+   "<",
+   ">",
+   "щ",
+   "э",
+   "№",
+   {
+    "t": "$$mdi:minus-circle-outline$$",
+    "type": "none"
+   },
+   {
+    "t": "$$mdi:minus-circle-outline$$",
+    "type": "none"
+   },
+   "$$mdi:keyboard-esc$$",
+   "_",
+   {
+    "t": "=",
+    "s": "+"
+   },
+   "[",
+   "]",
+   {
+    "t": "$$mdi:menu-left$$",
+    "s": "$$mdi:mouse$$"
+   },
+   "$$mdi:mouse-left-click-outline$$",
+   {
+    "t": "$$mdi:menu-right$$",
+    "s": "$$mdi:mouse$$"
+   },
+   "\"",
+   {
+    "t": "$$mdi:minus-circle-outline$$",
+    "type": "none"
+   },
+   ":",
+   {
+    "t": "/",
+    "s": "?"
+   },
+   "?",
+   {
+    "t": "$$mdi:minus-circle-outline$$",
+    "type": "none"
+   },
+   {
+    "t": "$$mdi:minus-circle-outline$$",
+    "type": "none"
+   },
+   {
+    "t": "$$mdi:minus-circle-outline$$",
+    "type": "none"
+   },
+   {
+    "t": "-",
+    "s": "_"
+   },
+   "+",
+   "(",
+   ")",
+   "$$mdi:volume-off$$",
+   {
+    "t": "$$mdi:menu-down$$",
+    "s": "$$mdi:mouse$$"
+   },
+   ";",
+   "ъ",
+   ",",
+   ".",
+   {
+    "t": "$$mdi:minus-circle-outline$$",
+    "type": "none"
+   },
+   {
+    "t": "$$mdi:minus-circle-outline$$",
+    "type": "none"
+   },
+   {
+    "t": "$$mdi:transfer$$",
+    "type": "trans"
+   },
+   {
+    "type": "held"
+   },
+   {
+    "t": "$$mdi:transfer$$",
+    "type": "trans"
+   },
+   "$$mdi:keyboard-space$$",
+   {
+    "t": "$$mdi:transfer$$",
+    "type": "trans"
    },
    {
     "t": "$$mdi:transfer$$",

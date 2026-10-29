@@ -32,7 +32,7 @@ function trim(km: Keymap): Keymap {
 const keymap = trim(JSON.parse(readFileSync(new URL("keymap.json", import.meta.url), "utf8")));
 
 // RU first; names are the layers' display-name in the ZMK keymap
-const LAYERS = ["QWERTY", "COLEMAK", "SYM", "NAVI", "HIGH"].filter((l) => l in keymap.layers);
+const LAYERS = ["QWERTY", "RU SYM", "COLEMAK", "SYM", "NAVI", "HIGH"].filter((l) => l in keymap.layers);
 const TITLES: Record<string, string> = { QWERTY: "RU", COLEMAK: "EN" };
 
 const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
