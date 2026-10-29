@@ -41,5 +41,6 @@ while pgrep -x Keymap >/dev/null; do sleep 0.1; done
 mkdir -p "$HOME/Applications"
 rm -rf "$APP"
 cp -R build/Keymap.app "$APP"
-open "$APP"
+# right after the copy LaunchServices may not know the new bundle yet (error -600)
+open "$APP" 2>/dev/null || { sleep 1; open "$APP"; }
 echo "Installed $APP"
