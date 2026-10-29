@@ -11,11 +11,11 @@
 # @raycast.icon 📋
 # @raycast.packageName Habits
 # @raycast.argument1 { "type": "dropdown", "placeholder": "habit", "data": [{"title":"☕ Coffee","value":"coffee"}] }
-# @raycast.argument2 { "type": "text", "placeholder": "count", "optional": true }
+# @raycast.argument2 { "type": "text", "placeholder": "when (15:30, 45m)", "optional": true }
 
 # Documentation:
 # @raycast.description Log any tracked habit
 
 set -euo pipefail
 
-exec "/Users/vitaliy/.local/bin/habit" log "$1" "${2:-}"
+exec "/Users/vitaliy/.local/bin/habit" log "$1" --at "${2:-}"

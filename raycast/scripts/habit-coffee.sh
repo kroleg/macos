@@ -10,11 +10,11 @@
 # Optional parameters:
 # @raycast.icon ☕
 # @raycast.packageName Habits
-# @raycast.argument1 { "type": "text", "placeholder": "count", "optional": true }
+# @raycast.argument1 { "type": "text", "placeholder": "when (15:30, 45m)", "optional": true }
 
 # Documentation:
 # @raycast.description Log coffee
 
 set -euo pipefail
 
-exec "/Users/vitaliy/.local/bin/habit" log "coffee" "${1:-}"
+exec "/Users/vitaliy/.local/bin/habit" log "coffee" --at "${1:-}"
