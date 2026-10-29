@@ -16,6 +16,7 @@ const SCRIPT_PATH = new URL(import.meta.url).pathname
 interface Policy {
   id: string
   displayName: string
+  adminOnly?: boolean
 }
 
 interface MePolicy {
@@ -134,7 +135,7 @@ console.log(
 for (const policy of policies) {
   const isActive = active?.id === policy.id
   console.log(
-    `${isActive ? '✓ ' : ''}${policy.displayName} | bash="${SCRIPT_PATH}" param1=set-policy param2=${policy.id} refresh=true terminal=false${isActive ? ' color=#34C759' : ''}`,
+    `${isActive ? '✓ ' : ''}${policy.displayName}${policy.adminOnly ? ' 🔒' : ''} | bash="${SCRIPT_PATH}" param1=set-policy param2=${policy.id} refresh=true terminal=false${isActive ? ' color=#34C759' : ''}`,
   )
 }
 
